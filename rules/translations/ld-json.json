@@ -1,4 +1,4 @@
-{ 
+{
   "translations": [
     {
       "type": "HTML",
@@ -21,9 +21,39 @@
       ],
       "value": [
         {
-          "paths": ["$.url", "$[*]['url']", "$.offers[*].url", "$.itemListElement[*].item['@id']", "$.offers[*].itemOffered.url"],
+          "paths": [
+            "$.url",
+            "$[*]['url']",
+            "$.offers[*].url",
+            "$.itemListElement[*].item['@id']",
+            "$.offers[*].itemOffered.url"
+          ],
           "type": "URL",
           "forceURLFormat": "siteSettings"
+        },
+        {
+          "paths": [
+            "$.[?(@root['@type'] == 'BreadcrumbList' && @root['@context'].match(/schema.org/i))].name",
+            "$[?(@root['@type'] == 'Product' && @root['@context'].match(/schema.org/i))]^.name",
+            "$[?(@root['@type'] == 'NewsArticle' && @root['@context'].match(/schema.org/i))]^.name",
+            "$[?(@root['@type'] == 'NewsArticle' && @root['@context'].match(/schema.org/i))]^.headline",
+            "$[?(@root['@type'] == 'Article' && @root['@context'].match(/schema.org/i))]^.name",
+            "$[?(@root['@type'] == 'Article' && @root['@context'].match(/schema.org/i))]^.headline",
+            "$[?(@root['@type'] == 'BlogPosting' && @root['@context'].match(/schema.org/i))]^.name",
+            "$[?(@root['@type'] == 'BlogPosting' && @root['@context'].match(/schema.org/i))]^.headline"
+          ]
+        },
+        {
+          "paths": [
+            "$[?(@root['@type'] == 'Product' && @root['@context'].match(/schema.org/i))]^.description",
+            "$[?(@root['@type'] == 'NewsArticle' && @root['@context'].match(/schema.org/i))]^.description",
+            "$[?(@root['@type'] == 'Article' && @root['@context'].match(/schema.org/i))]^.description",
+            "$[?(@root['@type'] == 'BlogPosting' && @root['@context'].match(/schema.org/i))]^.description"
+          ],
+          "type": "HTML",
+          "transforms": {
+            "name": "html"
+          }
         }
       ]
     }
